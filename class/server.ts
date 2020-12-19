@@ -35,8 +35,16 @@ export default class Server{
     escucharSockets(){
         console.log('escuchando- sockets');
 
+        // socket nos genera el id del socket en cliente.id y no del cliente ni del usuario 
         this.io.on('connection', cliente =>{
-               console.log('cliente conectado ');
+
+            //conectar cliente
+
+            socket.conectarUsuario(cliente)
+              
+    
+            //login
+               socket.configurarUsuario(cliente, this.io);
 
                //escucahr Mensajes
 
@@ -45,6 +53,7 @@ export default class Server{
                //desconectar
 
                socket.desconectar( cliente );
+
 
             
 
