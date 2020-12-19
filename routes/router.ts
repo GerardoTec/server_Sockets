@@ -1,5 +1,7 @@
 import {Router, Request, Response } from 'express';
+import { Socket } from 'socket.io';
 import Server from '../class/server';
+import { usuariosConectados } from '../sockets/socket';
 
 
 
@@ -62,5 +64,35 @@ router.post('/mensaje/:id', ( req: Request, res: Response) =>{
        de,
        id
     });
+
+});
+
+router.get('/usuarios', ( req, res) =>{
+
+    const server = Server.instance;
+
+    server.io.clients( (err: any, cliente: string[]) =>{
+
+        if( err ){
+            res.json({
+                ok:false
+
+            });
+        }
+
+        res.json({
+            ok:true,
+            cliente
+        })
+    });
+
+});
+
+router.get('/usuarios/detalle', (req, res ) =>{
+
+    res.json({
+        ok:true,
+        cliente: usuariosConectados.getLista()   
+    })
 
 });

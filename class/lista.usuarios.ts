@@ -36,7 +36,7 @@ public actualizarNombre(id: string, nombre:string){
 }
 /* ahora vamos a obtener la lista de usuarios conectados */
 public getLista(){
-    return this.lista;
+    return this.lista.filter( usuario=> usuario.nombre!=='sin-nombre');
 
 }
 // obtener un usuario 
